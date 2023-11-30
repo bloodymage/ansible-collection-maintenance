@@ -19,7 +19,7 @@
   hosts: all:!localhost
   ignore_unreachable: true
   roles:
-    - role: bloodymage.autonomy.maintenance_dns
+    - role: bloodymage.maintenance.dns
 
 - name: "Upgrade Systems."
   hosts: all:!localhost:!public_zone:!virtual_hosts:!printers
@@ -33,7 +33,7 @@
         - aptitude
         - upgrade
 
-    - role: bloodymage.autonomy.maintenance_upgrade
+    - role: bloodymage.maintenance.upgrade
       tags:
         - maintenance-upgrade
         - maintenance_upgrade
