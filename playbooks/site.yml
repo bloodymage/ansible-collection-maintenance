@@ -1,0 +1,26 @@
+---
+# ==================================================================================================
+#
+# This playbook is for running maintenance tasks.
+#
+# ==================================================================================================
+- hosts: all
+  gather_facts: no
+  roles:
+    - role: bloodymage.maintenance.wake_on_lan
+      tags:
+        - never
+        - wakeonlan
+        - wake-on-lan
+
+- import_playbook: daily.yml
+
+- import_playbook: weekly.yml
+  when:
+    - ansible_date_time.weekday == "Monday"
+
+- import_playbook: monthly.yml
+  when:
+    - ansible_date_time.day == "01"
+
+- import_playbook: misc.yml
